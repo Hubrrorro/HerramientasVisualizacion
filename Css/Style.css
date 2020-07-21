@@ -1,0 +1,110 @@
+.lobster {
+    font-family: 'Lobster', cursive;
+    font-size: medium;   
+}
+.logo {
+    width: 150px;
+    height: 150px;
+}
+.titulo {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: bolder;
+    font-size:larger;
+}
+.rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: bolder;
+}
+.imgenCentro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.backgroundlateral{
+
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f2f5f6+0,e3eaed+37,c8d7dc+100;Grey+3D+%234 */
+background: rgb(242,245,246); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(242,245,246,1) 0%, rgba(227,234,237,1) 37%, rgba(200,215,220,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+.sidenav{
+    width: auto !important;
+}
+.hbar{
+    height: 35px;
+    color: white;
+    background-color: cadetblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbarEcobici{
+    height: 35px;
+    color: white;
+    background-color: rgb(20, 94, 20);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbarMetroBus{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a90329+0,8f0222+44,6d0019+100;Brown+Red+3D */
+background: rgb(169,3,41); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(169,3,41,1) 0%, rgba(143,2,34,1) 44%, rgba(109,0,25,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+color:white;
+margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbarRTP{
+    height: 35px;
+    background-color: rgb(255,48,25); /* Old browsers */
+    background-color: -moz-linear-gradient(-45deg,  rgba(255,48,25,1) 0%, rgba(207,4,4,1) 100%); /* FF3.6-15 */
+    background-color: -webkit-linear-gradient(-45deg,  rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background-color: linear-gradient(135deg,  rgba(255,48,25,1) 0%,rgba(207,4,4,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+color:white;
+margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbarSTC{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffa84c+0,ff7b0d+100;Orange+3D */
+background: rgb(255,168,76); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(255,168,76,1) 0%, rgba(255,123,13,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  rgba(255,168,76,1) 0%,rgba(255,123,13,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  rgba(255,168,76,1) 0%,rgba(255,123,13,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa84c', endColorstr='#ff7b0d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+color:black;
+margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbarSTE{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#d4e4ef+0,86aecc+100;Grey+Gloss */
+background: rgb(212,228,239); /* Old browsers */
+background: -moz-linear-gradient(-45deg,  rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  rgba(212,228,239,1) 0%,rgba(134,174,204,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  rgba(212,228,239,1) 0%,rgba(134,174,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+color:black;
+margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
