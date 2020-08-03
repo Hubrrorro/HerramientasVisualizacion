@@ -58,7 +58,7 @@
                     <label>Selecciona el dia:</label>
                   </div>
             </div>
-            <div class="col s6 m4 l4">
+            <div class="col s12 m4 l4">
                 <button id="btnbuscar" class="waves-effect waves-light btn indigo darken-4 z-depth-4"><i class="material-icons right">search</i>Buscar</button>
             </div>
           </div>
@@ -68,7 +68,7 @@
             <div class="col s12">
                 <h2 class="titulo">Filtros dinámicos</h2>
             </div>
-            <div class="col s2">
+            <div class="col s4 m2 l2">
                 <p>
                     <label>
                       <input id="Todos" class="rbfiltro" name="group1" type="radio" value="Todos" checked />
@@ -76,7 +76,7 @@
                     </label>
                   </p>
             </div>
-            <div class="col s2">
+            <div class="col s4 m2 l2">
                 <p>
                     <label>
                       <input id="checkEcobici" class="rbfiltro" name="group1" value="Ecobici"  type="radio" />
@@ -84,7 +84,7 @@
                     </label>
                   </p>
             </div>
-            <div class="col s2">
+            <div class="col s4 m2 l2">
                 <p>
                     <label>
                       <input id="checkMetrobus" class="rbfiltro" name="group1" value="Metrobús"  type="radio" />
@@ -100,7 +100,7 @@
                     </label>
                   </p>
             </div>
-            <div class="col s2">
+            <div class="col s4 m2 l2">
                 <p>
                     <label>
                       <input id="checkSTC" class="rbfiltro" name="group1"  type="radio" value="STC" />
@@ -108,7 +108,7 @@
                     </label>
                   </p>
             </div>
-            <div class="col s2">
+            <div class="col s4 m2 l2">
                 <p>
                     <label>
                       <input id="checkSTE" class="rbfiltro" name="group1"  type="radio" value="STE-Trolebús" />
@@ -150,6 +150,7 @@
             $('.collapsible').collapsible();
             $('select').formSelect();
             FncCargaDias();
+            $('.sidenav').sidenav();
         });
         function FncCargaDias()
         {
