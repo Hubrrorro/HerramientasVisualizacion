@@ -44,6 +44,10 @@ function FncCreaMenu(control)
     hijoMenu2.nombre = "D3 (II)";
     hijoMenu2.url = 'Grafica2.html';
     hijos.push(hijoMenu2);
+    var hijoMenu3 = new Object();
+    hijoMenu3.nombre = "D3 (III)";
+    hijoMenu3.url = 'Grafica3.html';
+    hijos.push(hijoMenu3);
     FncCreaElementoTexto(menu,_nombreCurso,'titulo');
     menu.append("li")
         .classed("logo",true)

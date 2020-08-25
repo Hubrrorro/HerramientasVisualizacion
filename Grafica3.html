@@ -58,104 +58,15 @@
             <div class="row center ">
                 <div class="col s12 imgenCentro ">
                   <img class="responsive-img"  src="Images/logo.png">
-                  <h1 class="titulo">Afluencia preliminar en transporte público - 2020</h1>
-                  <a href="https://datos.cdmx.gob.mx/explore/dataset/afluencia-preliminar-en-transporte-publico">Los datos provienen en tiempo real de la siguiente página de CDMX GOB</a>
+                  <h1 class="titulo">Covid</h1>
+                  <a href="https://datos.cdmx.gob.mx/api/records/1.0/analyze/?refine.entidad=CIUDAD+DE+MEXICO&timezone=America%2FMexico_City&dataset=base-covid-sinave&x=fecinisi.year&x=fecinisi.month&x=fecinisi.day&x=sector&sort=x.fecinisi.year,x.fecinisi.month,x.fecinisi.day,x.sector&maxpoints=&y.serie1-1.expr=cvelocal&y.serie1-1.func=COUNT&y.serie1-1.cumulative=false&y.serie1-2.expr=edad&y.serie1-2.func=AVG&y.serie1-2.cumulative=false&y.serie1-3.expr=mesesemb&y.serie1-3.func=AVG&y.serie1-3.cumulative=false&lang=es">Los datos provienen en tiempo real de la siguiente página de CDMX GOB</a>
                 </div>
             </div>
           <div class="row center">
-            <div class="col s12">
-                <h2 class="titulo">Filtros</h2>
-            </div>
-            <div class="col s4 m4 l4">
-                <div class="input-field">
-                    <select id="ddlMes" >
-                      <option value="03" selected>Marzo</option>
-                      <option value="04">Abril</option>
-                      <option value="05">Mayo</option>
-                      <option value="06">Junio</option>
-                      <option value="07">Julio</option>
-                      <option value="08">Agosto</option>
-                      <option value="09">Septiembre</option>
-                      <option value="10">Obtubre</option>
-                      <option value="11">Noviembre</option>
-                      <option value="12">Diciembre</option>
-                    </select>
-                    <label>Selecciona el mes:</label>
-                  </div>
-            </div>
-            <div class="col s4 m4 l4">
-                <div class="input-field">
-                    <select id="ddlDia" >
-                    </select>
-                    <label>Selecciona el dia:</label>
-                  </div>
-            </div>
-            
             <div class="col s12 m12 l12">
-              <label>Da clic en el color para cambiar el color de la gráfica</label>
+              <a id="btnpause" class="waves-effect waves-light btn"><i class="material-icons left">pause</i>Pause</a>
+              <a id="btnplay" style="display: none;" class="waves-effect waves-light btn"><i class="material-icons left">play_arrow</i>Play</a>
             </div>
-            <div class="col s12 m12 l12">
-              <div class="row">
-                
-            <div class="col s6 m2 l2" style="display:flex">
-                <p>
-                    <label>
-                      <input id="Todos" class="rbfiltro" name="group1" type="radio" value="Todos" checked />
-                      <span>Todos</span>
-                    </label>
-                    
-                  </p>
-            </div>
-            <div class="col s6 m2 l2" style="display:flex">
-                <p>
-                    <label>
-                      <input id="checkEcobici" class="rbfiltro" name="group1" value="Ecobici"  type="radio" />
-                      <span>Ecobici</span>
-                    </label>
-                    <div id="checkEcobiciColor" class="spanColor" ></div>
-                  </p>
-            </div>
-            <div class="col s6 m2 l2"  style="display:flex">
-                <p>
-                    <label>
-                      <input id="checkMetrobus" class="rbfiltro" name="group1" value="Metrobús"  type="radio" />
-                      <span>Metrobús</span>
-                    </label>
-                    <div id="checkMetrobusColor" class="spanColor" ></div>
-                  </p>
-            </div>
-            <div class="col s6 m2 l2" style="display:flex">
-                <p>
-                    <label>
-                      <input id="checkRTP" class="rbfiltro" name="group1" type="radio" value="RTP" />
-                      <span>RTP</span>
-                    </label>
-                    <div id="checkRTPColor" class="spanColor" ></div>
-                  </p>
-            </div>
-            <div class="col s6 m2 l2"  style="display:flex">
-                <p>
-                    <label>
-                      <input id="checkSTC" class="rbfiltro" name="group1"  type="radio" value="STC" />
-                      <span>STC</span>
-                    </label>
-                    <div id="checkSTCColor" class="spanColor" ></div>
-                  </p>
-            </div>
-            <div class="col s6 m2 l2"  style="display:flex">
-                <p>
-                    <label>
-                      <input id="checkSTE" class="rbfiltro" name="group1"  type="radio" value="STE-Trolebús" />
-                      <span>STE-Trolebús</span>
-                    </label>
-                    <div id="checkSTEColor" class="spanColor" ></div>
-                  </p>
-            </div>
-            
-          </div>
-          </div>
-        </div>
-          <div class="row center">
               <div class="col s12 m12 l12">
                 <div id="grafica" class="grafica z-depth-4"></div>
               </div>
@@ -163,14 +74,6 @@
         </div>
         
 
-        <div id="modal1" class="modal">
-          <div class="modal-content">
-            <h6 id="titulocolor">Elige un color a tu gráfica</h4>
-              <a href="https://bl.ocks.org/adnenre/8fae80314887a4554db99268c1d7041e">Implementación de paleta svg por Adnen rebai’s...</a>
-              <input type="hidden" id="hdvalor">
-            <div id="colorPicker" class="divColor"></div>
-          </div>
-        </div>
 
     </main>
     <script
@@ -184,6 +87,16 @@
     <script src="Scripts/paginas.js"></script>
     <script src="Scripts/menu.js"></script>
     <script>
+      $('#btnpause').click(function(){
+        pausa= true;
+        $('#btnpause').hide();
+        $('#btnplay').show();
+      });
+      $('#btnplay').click(function(){
+        pausa= false;
+        $('#btnpause').show();
+        $('#btnplay').hide();
+      });
       $('.spanColor').click(function(){
         $('#modal1').modal();
         var nombreid= this.id;
@@ -195,164 +108,192 @@
         open_palet();
         $('#modal1').modal('open');
       });
-      function FncmuestraColor()
-      {
-        $('#checkEcobiciColor').attr('style',  'background-color:' + arrayOrganismo.find( org => org.organismo === 'Ecobici').color);
-        $('#checkMetrobusColor').attr('style',  'background-color:' + arrayOrganismo.find( org => org.organismo === 'Metrobús').color);
-        $('#checkRTPColor').attr('style',  'background-color:' + arrayOrganismo.find( org => org.organismo === 'RTP').color);
-        $('#checkSTCColor').attr('style',  'background-color:' + arrayOrganismo.find( org => org.organismo === 'STC').color);
-        $('#checkSTEColor').attr('style',  'background-color:' + arrayOrganismo.find( org => org.organismo === 'STE-Trolebús').color);
-      }
         var _nombreCurso ,_docente,_alumno;
         FncCargaVariables();
         FncCreaMenu('nav-mobile');
-        const arrayOrganismo = [{organismo: 'Ecobici', color:'#88cc44'}, 
-        {organismo: 'Metrobús', color:'#1199ff'},
-        {organismo: 'RTP', color:'#ff9900'},
-        {organismo: 'STC', color:'#ff4422'},
-        {organismo: 'STE-Trolebús', color:'#999999'}];
         var ancho = +d3.select(".grafica").style('width').slice(0,-2);
-          var alto = +d3.select(".grafica").style('height').slice(0,-2);
-          
-          var margin = {top: 30, right: 30, bottom: 70, left: 60},
+        var alto = ancho * 9 / 16
+
+          var margin = {top: 20, right: 20, bottom: 20, left: 20}
           width = ancho - margin.left - margin.right,
-          height = 600 - margin.top - margin.bottom;
+          height = alto - margin.top - margin.bottom;
           
+          rangoNombre  = ['CRUZ ROJA','ESTATAL','PRIVADA','PEMEX','SSA','SEDENA','IMSS','ISSSTE']
+          rangoColor   = ['#88cc44','#1199ff','#ff9900','#ff4422','#999999','#C0C0C0','#FF5733','#1B3982']
+
+          arrRango = d3.scaleOrdinal()
+                        .domain(rangoNombre)
+                        .range(rangoColor)
+
           var svg = d3.select("#grafica")
             .append("svg")
+            .attr("width", ancho )
+              .attr("height", alto)
+            /*
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
-            .append("g")
+              */
+            
+          var g= svg.append("g")
+              .attr("width", width)
+              .attr("height", height)
               .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-            // Initialize the X axis
-var x = d3.scaleBand()
-  .range([ 0, width ])
-  .padding(0.2);
-var xAxis = svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
 
-// Initialize the Y axis
-var y = d3.scaleLinear()
-  .range([ height, 0]);
-var yAxis = svg.append("g")
-  .attr("class", "myYaxis")
+fechaMuestra = g.append('text')
+               .attr('x', width /2)
+               .attr('y', height /2)
+               .attr('text-anchor', 'middle')
+               .attr('font-size','30px')
 
-  $('#ddlMes').change( function(){
-              BuscarDatos();
-            });
-  $('#ddlDia').change( function(){
-              BuscarDatos();
-            });
+            leyendaWidth = 120
+            leyendaHeight = 160
+
+            ancholeyenda = ancho -margin.right -leyendaWidth;
+            altoleyenda = alto -margin.top -leyendaHeight;
+            leyenda = svg.append('g')
+                        .attr('transform','translate('+ ancholeyenda +','+ margin.top +')')
+            
+            leyenda.append('rect')
+            .attr("width", leyendaWidth)
+              .attr("height", leyendaHeight)
+              .attr("x", 0)
+              .attr("y", 0 )
+              .attr("fill", '#CCCCCC')
+
+
+              rangoNombre.forEach((c,i) =>{
+                console.log(c)
+                  distRen = 20 * i;
+                  ren = leyenda.append('g')
+                        .attr('transform','translate(0,'+ distRen +')')
+                  ren.append('rect')
+                      .attr('x', 5)
+                      .attr('y', 0)
+                      .attr('width', 10)
+                      .attr('height', 10)
+                      .attr('fill', arrRango(c))
+
+                  ren.append('text')
+                      .attr('x', 20)
+                      .attr('y', 10)
+                      .attr('text-anchor','start')
+                      .attr('text-transform','capitalize')
+                      .text(c)
+              })
+
+
+        xGroup = g.append('g')
+                .attr("transform",'translate(0,' + height +')')
+        yGroup = g.append('g')
+                //.attr("transform",'translate(0,' + width +')')
         $(document).ready(function(){
             $('.materialboxed').materialbox();
             $('.collapsible').collapsible();
             $('select').formSelect();
-            FncCargaDias();
             $('.sidenav').sidenav();
             BuscarDatos();
-            FncmuestraColor();
 
         });
-        function FncCargaDias()
-        {
-            var mesint = parseInt($('#ddlMes').val());
-            var fecha = new Date(2020, mesint,1);
-            d = new Date(fecha - 1);
-            FncAgregaOption(d.getDate());
-        }
-        $('#ddlMes').on('change', function(){
-            FncCargaDias();
-        });
-        function FncAgregaOption(diamax)
-        {
-            $('#ddlDia').html('');
-            var i;
-            for (i = 1; i <= diamax; i++) {
-                if (i < 10)
-                    $('#ddlDia').append('<option value="0'+ i +'">' + i + '</option>');
-                else
-                    $('#ddlDia').append('<option value="'+ i +'">' + i + '</option>');
-            }
-            $('select').formSelect();  
-            
-        }
-        $('#btnbuscar').click(function(){
-            BuscarDatos();
-        });
+        
+        y = d3.scaleLinear()
+        x = d3.scaleLinear()
+        r = d3.scaleLinear()
+
+        g.append("text")             
+          .attr("transform",
+                "translate(" + (width/2) + " ," + 
+                              (height - margin.top) + ")")
+          .style("text-anchor", "middle")
+          .text("Promedio de edad");
+
+          g.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 0 + margin.left)
+          .attr("x",0 - (height / 2))
+          .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text("# Mujeres embarazadas");     
+
         var datos;
+        var date = new Date(2020,2,1);
+        var indexDia = 1;
+        var pausa = false;
+        function Step(data)
+        {
+          date.setDate(date.getDate() + indexDia);
+                      var mes = date.getMonth()
+                      
+                      if (mes > maxMes)
+                      {
+                        date = new Date(2020,2,1);
+                         mes = date.getMonth()
+                      }
+                      var dia = date.getDate()
+                      var anio =  date.getFullYear()
+                    datos =data.filter(function(d,i){
+                    return d.x.fecinisi.year == anio && d.x.fecinisi.month == mes && d.x.fecinisi.day == dia;
+               
+            })
+
+            y 
+                    .domain([0 ,
+                    d3.max(datos,(d) => d["serie1-3"] )])
+                .range([height,0])
+            x 
+                .domain([d3.min(datos,(d) => d["serie1-2"] ),
+                d3.max(datos,(d) => d["serie1-2"] )])
+                .range([0 ,width ])
+            r 
+                .domain([d3.min(datos,(d) => d["serie1-1"] ),
+                d3.max(datos,(d) => d["serie1-1"] )])
+                .range([30,70])
+
+              
+                    render(datos, anio, mes, dia);
+        }
         function BuscarDatos(){
-            var mes = $('#ddlMes').val();
-            var dia = $('#ddlDia').val();
-            var urlDatos = "https://datos.cdmx.gob.mx/api/records/1.0/search/?dataset=afluencia-preliminar-en-transporte-publico&q=&rows=1000&facet=fecha&facet=mes&facet=organismo&facet=dia_mes_&refine.mes=2020-"+ mes +"&refine.dia_mes_=" + dia;
+            var urlDatos = "https://datos.cdmx.gob.mx/api/records/1.0/analyze/?refine.entidad=CIUDAD+DE+MEXICO&timezone=America%2FMexico_City&dataset=base-covid-sinave&x=fecinisi.year&x=fecinisi.month&x=fecinisi.day&x=sector&sort=x.fecinisi.year,x.fecinisi.month,x.fecinisi.day,x.sector&maxpoints=&y.serie1-1.expr=cvelocal&y.serie1-1.func=COUNT&y.serie1-1.cumulative=false&y.serie1-2.expr=edad&y.serie1-2.func=AVG&y.serie1-2.cumulative=false&y.serie1-3.expr=mesesemb&y.serie1-3.func=AVG&y.serie1-3.cumulative=false&lang=es";
             d3.json(urlDatos, function(error, data){
-                if(error)
-                    {
-                        return console.error(error);
-                    }
-                    datos= data.records;
-                    render(data.records);
-                    $('.tooltipped').tooltip(); 
-            });
+                
+                    datos = data;
+                    maxMes = d3.max(datos,(d) => d.x.fecinisi.month)
+                    d3.interval((d) => {
+                      if (!pausa){
+                      Step(data)
+                      }
+                  },2000)
+            })
         }
-        function render(data){
-              x.domain(data.map(function(d){ return d.fields.organismo + '-' + d.fields.linea_servicio }))
-                xAxis.call(d3.axisBottom(x))
-                .selectAll("text")
-                  .attr("transform", "translate(-10,0)rotate(-45)")
-                  .style("text-anchor", "end");
-
-                y.domain([0, d3.max(data, function(d) { return d.fields.afluencia_total_cifras_preliminares; }) ]);
-                yAxis.transition().duration(1000).call(d3.axisLeft(y));
-
+        function render(data , anio , mes , dia){
+         
+            fechaMuestra.text(anio + '/' + mes + '/' + dia)
 
             
-               var barras= svg.selectAll("rect")
-                .data(data);
-              barras  
-                .enter()
-                .append("rect")
-                .merge(barras)
-                .transition() 
-                .duration(500)
-                .attr("class","tooltipped")
-                .attr("data-position","top") 
-                  .attr("x", function(d){ return x(d.fields.organismo + '-' + d.fields.linea_servicio) })
-                  .attr("y", function(d){ return y(d.fields.afluencia_total_cifras_preliminares) })
-                  .attr("width", x.bandwidth())
-                  .attr("height", function(d) { return height - y(d.fields.afluencia_total_cifras_preliminares); })
-                  .attr("fill", function(d){  
-                  if (arrayOrganismo.find( org => org.organismo === d.fields.organismo)=== undefined){
-                    return "#69b3a2"
-                  }
-                  return arrayOrganismo.find( org => org.organismo === d.fields.organismo).color })
-                  
-                  .attr('data-tooltip', function(d){ return d.fields.organismo + '-' + d.fields.linea_servicio + ' ('+ d.fields.afluencia_total_cifras_preliminares +')' }); 
-            barras
-                  .exit()
-                  .remove();
-                  $('.tooltipped').tooltip(); 
-               
-             
-              // Bars
-               
-        }
-        function filtros(){
-            var selected= $('input:radio[name=group1]:checked').val();
             
+            xAxisCall = d3.axisBottom(x)
+            xGroup.call(xAxisCall)
+            yAxisCall = d3.axisLeft(y)
+            yGroup.call(yAxisCall)
 
-            var d= datos.filter(function(d,i){
-                if (selected== "Todos")
-                    return datos;   
+             puntos = g.selectAll('circle')
+                      .data(data)
 
-                return d.fields.organismo == selected;
-                })
-            render(d);
-            $('.tooltipped').tooltip(); 
+             puntos
+                  .enter()
+                  .append('circle')  
+                  .merge(puntos)
+                  .transition()
+                  .attr('cx', function(f){ return x(f["serie1-2"]) })
+                  .attr('cy', function(f){ return y(f["serie1-2"]) })
+                  .attr('r', function(f){ return r(f["serie1-1"]) })
+                  .attr('fill', (f) => arrRango(f.x.sector))
+                  .attr('fill-opacity', 0.5)
+                  .attr('stroke','black')
+            puntos.exit()
+                  .remove()
         }
-        $('.rbfiltro').click(function(){
-            filtros();
-        });
+       
       
 ///////Palet
 var svg2 = d3.select('#colorPicker').append('svg')
