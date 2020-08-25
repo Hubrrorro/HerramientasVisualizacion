@@ -97,17 +97,7 @@
         $('#btnpause').show();
         $('#btnplay').hide();
       });
-      $('.spanColor').click(function(){
-        $('#modal1').modal();
-        var nombreid= this.id;
-        var check = nombreid.replace('Color','');
-        var valor =$('#'+  check).val();
-        $('#hdvalor').text(valor);
-        $('#titulocolor').text('Elige un color para tus barras de '+ valor);
-        draw_palet();
-        open_palet();
-        $('#modal1').modal('open');
-      });
+      
         var _nombreCurso ,_docente,_alumno;
         FncCargaVariables();
         FncCreaMenu('nav-mobile');
@@ -163,7 +153,6 @@ fechaMuestra = g.append('text')
 
 
               rangoNombre.forEach((c,i) =>{
-                console.log(c)
                   distRen = 20 * i;
                   ren = leyenda.append('g')
                         .attr('transform','translate(0,'+ distRen +')')
@@ -221,7 +210,8 @@ fechaMuestra = g.append('text')
         var pausa = false;
         function Step(data)
         {
-          date.setDate(date.getDate() + indexDia);
+                      //date.setDate(date.getDate() + indexDia);
+                      date.setMonth(date.getMonth()+indexDia)
                       var mes = date.getMonth()
                       
                       if (mes > maxMes)
@@ -251,13 +241,15 @@ fechaMuestra = g.append('text')
 
               
                     render(datos, anio, mes, dia);
+                    //render(datos, anio, mes);
         }
+        var maxMes;
         function BuscarDatos(){
             var urlDatos = "https://datos.cdmx.gob.mx/api/records/1.0/analyze/?refine.entidad=CIUDAD+DE+MEXICO&timezone=America%2FMexico_City&dataset=base-covid-sinave&x=fecinisi.year&x=fecinisi.month&x=fecinisi.day&x=sector&sort=x.fecinisi.year,x.fecinisi.month,x.fecinisi.day,x.sector&maxpoints=&y.serie1-1.expr=cvelocal&y.serie1-1.func=COUNT&y.serie1-1.cumulative=false&y.serie1-2.expr=edad&y.serie1-2.func=AVG&y.serie1-2.cumulative=false&y.serie1-3.expr=mesesemb&y.serie1-3.func=AVG&y.serie1-3.cumulative=false&lang=es";
             d3.json(urlDatos, function(error, data){
                 
                     datos = data;
-                    maxMes = d3.max(datos,(d) => d.x.fecinisi.month)
+                    maxMes = d3.max(data,(d) => d.x.fecinisi.month)
                     d3.interval((d) => {
                       if (!pausa){
                       Step(data)
@@ -266,10 +258,11 @@ fechaMuestra = g.append('text')
             })
         }
         function render(data , anio , mes , dia){
-         
+          //function render(data , anio , mes ){
             fechaMuestra.text(anio + '/' + mes + '/' + dia)
-
+            //fechaMuestra.text(anio + '-' + mes)
             
+            console.log(data)
             
             xAxisCall = d3.axisBottom(x)
             xGroup.call(xAxisCall)
@@ -285,7 +278,7 @@ fechaMuestra = g.append('text')
                   .merge(puntos)
                   .transition()
                   .attr('cx', function(f){ return x(f["serie1-2"]) })
-                  .attr('cy', function(f){ return y(f["serie1-2"]) })
+                  .attr('cy', function(f){ return y(f["serie1-3"])  })
                   .attr('r', function(f){ return r(f["serie1-1"]) })
                   .attr('fill', (f) => arrRango(f.x.sector))
                   .attr('fill-opacity', 0.5)
