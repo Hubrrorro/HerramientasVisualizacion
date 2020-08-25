@@ -63,9 +63,32 @@
                 </div>
             </div>
           <div class="row center">
-            <div class="col s12 m12 l12">
+            <div class="col s3 m3 l3">
               <a id="btnpause" class="waves-effect waves-light btn"><i class="material-icons left">pause</i>Pause</a>
               <a id="btnplay" style="display: none;" class="waves-effect waves-light btn"><i class="material-icons left">play_arrow</i>Play</a>
+            </div>
+            <div  class="col s3 m3 l3">
+              <div id="slider-container">
+                <span id="year-slider"></span>
+              </div>
+            </div>
+            <div class="input-field col s3 m3 l3">
+              <select id="ddlMes">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+              </select>
+              <label>Mes</label>
+            </div>
+            <div class="input-field col s3 m3 l3">
+              <select id="ddlSector">
+               
+              </select>
+              <label>Sector</label>
             </div>
               <div class="col s12 m12 l12">
                 <div id="grafica" class="grafica z-depth-4"></div>
@@ -86,6 +109,7 @@
     <script src="Scripts/variables.js"></script>
     <script src="Scripts/paginas.js"></script>
     <script src="Scripts/menu.js"></script>
+    <script src="Scripts/d3-simple-slider.js"></script>
     <script>
       $('#btnpause').click(function(){
         pausa= true;
@@ -103,14 +127,19 @@
         FncCreaMenu('nav-mobile');
         var ancho = +d3.select(".grafica").style('width').slice(0,-2);
         var alto = ancho * 9 / 16
-
+        var iDia = 1
+        yearSlider = d3.select('#year-slider')
           var margin = {top: 20, right: 20, bottom: 20, left: 20}
           width = ancho - margin.left - margin.right,
           height = alto - margin.top - margin.bottom;
-          
+          var interval;
           rangoNombre  = ['CRUZ ROJA','ESTATAL','PRIVADA','PEMEX','SSA','SEDENA','IMSS','ISSSTE']
           rangoColor   = ['#88cc44','#1199ff','#ff9900','#ff4422','#999999','#C0C0C0','#FF5733','#1B3982']
-
+          $('#ddlSector').append('<option value="Todos">Todos</option>');
+          rangoNombre.forEach((d)=>{
+            $('#ddlSector').append('<option value="'+ d +'">'+ d +'</option>');
+          })
+          $('select').formSelect();  
           arrRango = d3.scaleOrdinal()
                         .domain(rangoNombre)
                         .range(rangoColor)
@@ -151,6 +180,14 @@ fechaMuestra = g.append('text')
               .attr("y", 0 )
               .attr("fill", '#CCCCCC')
 
+ancho_slider= d3.select('#slider-container')
+                .style('width').slice(0,-2)
+
+slider = d3.sliderHorizontal()
+          .step(1)
+          .ticks(5)
+          .width(ancho_slider- 100)
+          .displayValue(true)
 
               rangoNombre.forEach((c,i) =>{
                   distRen = 20 * i;
@@ -204,25 +241,69 @@ fechaMuestra = g.append('text')
           .style("text-anchor", "middle")
           .text("# Mujeres embarazadas");     
 
+        sliderdia = yearSlider.append('svg');
+
         var datos;
-        var date = new Date(2020,2,1);
+        var datosTodos;
         var indexDia = 1;
+        var valorMes = parseInt($('#ddlMes').val());
+        var date = new Date(2020,valorMes,1);
+        ActualizaSlider()
+        
         var pausa = false;
+        
+        function ActualizaSlider(){
+          var fechaMax = new Date(2020,valorMes,1);
+        fechaMax.setDate(fechaMax.getDate() - indexDia);
+
+          yearSlider
+        .attr('min', 1)
+        .attr('max', fechaMax.getDate())
+    yearSlider.node().value = 1
+
+    slider
+        .min(1)
+        .max(fechaMax.getDate())
+    sliderdia
+        .attr('width', ancho_slider-20)
+        .attr('height', 50)
+        .merge(sliderdia)
+        .append('g')
+        //.attr('transform', 'translate(1'. 30)')
+        .call(slider)
+        
+
+        sliderdia.exit()
+                .remove()
+        }
+
+
+        $('#ddlMes').change(function(){
+          
+            date = new Date(2020,valorMes + 1,1);
+            valorMes = parseInt($('#ddlMes').val());
+            ActualizaSlider()
+        });
         function Step(data)
         {
-                      //date.setDate(date.getDate() + indexDia);
-                      date.setMonth(date.getMonth()+indexDia)
+                      date.setDate(date.getDate() + indexDia);
+                      //date.setMonth(date.getMonth()+indexDia)
                       var mes = date.getMonth()
-                      
-                      if (mes > maxMes)
+                      if (mes > valorMes)
                       {
-                        date = new Date(2020,2,1);
+                        date = new Date(2020,valorMes,1);
                          mes = date.getMonth()
                       }
                       var dia = date.getDate()
+                      iDia = dia;
                       var anio =  date.getFullYear()
+                      if ($('#ddlSector').val() != "Todos"){
+                        data =data.filter(function(d,i){
+                    return d.x.sector == $('#ddlSector').val();
+                      })}
                     datos =data.filter(function(d,i){
                     return d.x.fecinisi.year == anio && d.x.fecinisi.month == mes && d.x.fecinisi.day == dia;
+                    console.log(datos)
                
             })
 
@@ -248,9 +329,9 @@ fechaMuestra = g.append('text')
             var urlDatos = "https://datos.cdmx.gob.mx/api/records/1.0/analyze/?refine.entidad=CIUDAD+DE+MEXICO&timezone=America%2FMexico_City&dataset=base-covid-sinave&x=fecinisi.year&x=fecinisi.month&x=fecinisi.day&x=sector&sort=x.fecinisi.year,x.fecinisi.month,x.fecinisi.day,x.sector&maxpoints=&y.serie1-1.expr=cvelocal&y.serie1-1.func=COUNT&y.serie1-1.cumulative=false&y.serie1-2.expr=edad&y.serie1-2.func=AVG&y.serie1-2.cumulative=false&y.serie1-3.expr=mesesemb&y.serie1-3.func=AVG&y.serie1-3.cumulative=false&lang=es";
             d3.json(urlDatos, function(error, data){
                 
-                    datos = data;
+              datosTodos = data;
                     maxMes = d3.max(data,(d) => d.x.fecinisi.month)
-                    d3.interval((d) => {
+                    interval= d3.interval((d) => {
                       if (!pausa){
                       Step(data)
                       }
@@ -537,6 +618,33 @@ function toggle_palet(){
          palet.attr('data-palet','on');
      }
 }
+
+
+
+slider.on('onchange', (value) => {
+  iDia = slider.value() - 1;
+  date = new Date(2020,valorMes,iDia);
+                      var mes = date.getMonth()
+                      var dia = date.getDate()
+                      var anio =  date.getFullYear()
+  Step(datosTodos)
+})
+slider.on('start', () => {
+  interval.stop()
+})
+slider.on('end', () => {
+  iDia = slider.value() - 1;
+  date = new Date(2020,valorMes,iDia);
+                      var mes = date.getMonth()
+                      var dia = date.getDate()
+                      var anio =  date.getFullYear()
+                      interval= d3.interval((d) => {
+                      if (!pausa){
+                      Step(datosTodos)
+                      }
+                  },2000)
+  
+})
 
 
 
